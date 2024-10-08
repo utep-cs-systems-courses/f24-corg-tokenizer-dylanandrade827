@@ -108,3 +108,4 @@ static char *all_tests() {
 
     return result != 0;
  }
+B
