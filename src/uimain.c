@@ -8,29 +8,19 @@ int main()
   char str[1000];
   char exit[4] = "exit";
   char history[7] = "history";
-  char * copy;
+  char *copy;
   List *list = init_history();
   int i = 0;
   int id = 0;
   
  top:
+  i = 0;
   printf("$ ");
   fgets(str, sizeof(str), stdin);
 
-  if (str[i] == exit[i]){
-    i = 0;
-    goto checkExit;
-  }
-
-  if (str[i] == history[i]){
-    i = 0;
-    goto checkHistory;
-  }
-
-  if (str[i] == '!'){
-    i = 0;
-    goto getHistory;
-  }
+  if (str[i] == exit[i]) goto checkExit;
+  if (str[i] == history[i]) goto checkHistory;
+  if (str[i] == '!') goto getHistory;
   goto skip;
       
  checkExit:
@@ -44,10 +34,11 @@ int main()
   if (i == 6 && str[7] == '\n') goto history;
   i++;
   goto checkHistory;
-
+  
  getHistory:
-  id = str[i+1] - '0';
+  id = str[i + 1] - '0';
   char * get = get_history(list, id);
+  add_history(list, get);
   printf("%s", get);
   goto top;
   
@@ -56,7 +47,6 @@ int main()
   add_history(list, copy);
   char ** tokenizer = tokenize(copy);
   print_tokens(tokenizer);
-  
   goto top;
 
  history:
@@ -68,4 +58,3 @@ int main()
   free_history(list);
   return 0;
 }
-B

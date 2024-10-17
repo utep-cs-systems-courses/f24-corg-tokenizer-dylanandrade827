@@ -43,7 +43,7 @@ void print_history(List *list){
   Item *hold = list->root->next;
   
   while(hold !=0){
-    printf("%d %s\n", hold->id, hold->str);
+    printf("%d %s", hold->id, hold->str);
     hold = hold->next;
   }
 }
