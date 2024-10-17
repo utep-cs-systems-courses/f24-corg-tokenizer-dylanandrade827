@@ -1,0 +1,4 @@
+CFLAGS=-g -O3
+
+all: src
+
